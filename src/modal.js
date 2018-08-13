@@ -4,21 +4,22 @@ import './styles/modal.scss'
 
 @Component({
   props: {
-    open: {
+    isOpen: {
       type: Boolean,
       default: false
     }
   }
 })
 export class Modal extends Vue {
-  isOpen = this.open
+  open = this.isOpen
 
   onOpen() {
-    this.isOpen = !this.isOpen && true
+    console.log(`open!`)
+    this.open = !this.open && true
   }
 
   onClose() {
-    this.isOpen = this.isOpen && false
+    this.open = this.open && false
   }
 
   listenKeyboard(event) {
@@ -39,7 +40,7 @@ export class Modal extends Vue {
 
   render(h) {
     return this.$scopedSlots.default({
-      isOpen: this.isOpen,
+      isOpen: this.open,
       onOpen: this.onOpen,
       onClose: this.onClose,
       onDialogClick: this.onDialogClick,
@@ -72,7 +73,7 @@ export class Modal extends Vue {
             {...props}
             {...data}
             class={`${data && data.class ? `${data.class} ` : ``}modal ${
-              this.isOpen ? `open` : ``
+              this.open ? `open` : ``
             }`}
           >
             {children}
